@@ -2,7 +2,6 @@
 
 var canvas;
 var canvasContext;
-var ballX = 50;
 
 window.onload = function () {
     var fps = 30;
@@ -15,10 +14,10 @@ window.onload = function () {
 }
 
 function drawEverything() {
-    ballX = ballX + 50;
-
     canvasContext.fillStyle = 'black';
     canvasContext.fillRect(0, 0, canvas.width, canvas.height)
-    canvasContext.fillStyle = 'red';
-    canvasContext.fillRect(ballX, 200, 30, 30)
+    canvasContext.fillStyle = 'white';
+    canvasContext.fillRect(10, 200, 20, 150)
+    canvasContext.fillStyle = 'white';
+    canvasContext.fillRect(770, 200, 20, 150)
 }
