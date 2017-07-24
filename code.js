@@ -17,12 +17,13 @@ function moveEverything() {
 }
 
 function drawEverything() {
-    canvasContext.fillStyle = 'black';
-    canvasContext.fillRect(0, 0, canvas.width, canvas.height)
-    canvasContext.fillStyle = 'white';
-    canvasContext.fillRect(10, 200, 20, 150)
-    canvasContext.fillStyle = 'white';
-    canvasContext.fillRect(770, 200, 20, 150)
+    colorRect(0, 0, canvas.width, canvas.height,'black')
+    colorRect(10, 200, 20, 150,'white')
+    colorRect(770, 200, 20, 150, 'white')
+}
+function colorRect(x, y, width, height, color) {
+    canvasContext.fillStyle = color;
+    canvasContext.fillRect(x, y, width, height);
 }
 
 function callBoth() {
