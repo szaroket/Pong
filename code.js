@@ -10,7 +10,10 @@ window.onload = function () {
     canvasContext = canvas.getContext('2d');
 
     // Refresh window
-    setInterval(drawEverything, 1000 / fps);
+    setInterval(callBoth, 1000 / fps);
+}
+function moveEverything() {
+
 }
 
 function drawEverything() {
@@ -20,4 +23,9 @@ function drawEverything() {
     canvasContext.fillRect(10, 200, 20, 150)
     canvasContext.fillStyle = 'white';
     canvasContext.fillRect(770, 200, 20, 150)
+}
+
+function callBoth() {
+    drawEverything();
+    moveEverything();
 }
