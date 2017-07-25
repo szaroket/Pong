@@ -9,10 +9,12 @@ var ballSpeedY = 4;
 var ballRadius = 10;
 var paddle1Y = 200;
 var paddle2Y = 200;
-var paddle1X = 10;
-var paddle2X = 770;
+var paddle1X = 0;
+var paddle2X = 790;
 var paddleHeight = 150;
-var paddleWidth = 20;
+var paddleWidth = 10;
+var player1Score = 0;
+var player2Score = 0;
 
 window.onload = function () {
     var fps = 30;
@@ -40,6 +42,7 @@ function moveEverything() {
             ballY < paddle1Y + paddleHeight) {
             ballSpeedX = -ballSpeedX;
         } else {
+            player2Score += 1;
             ballReset();
         }
     }
@@ -49,6 +52,7 @@ function moveEverything() {
             ballY < paddle2Y + paddleHeight) {
             ballSpeedX = -ballSpeedX;
         } else {
+            player1Score += 1;
             ballReset();
         }
     }
@@ -68,6 +72,10 @@ function drawEverything() {
     colorRect(paddle2X, paddle2Y, paddleWidth, paddleHeight, 'white')
 
     colorCircle(ballX, ballY, ballRadius, 'white');
+
+    canvasContext.font = "20px Georgia";
+    canvasContext.fillText("Score: " + player1Score, 100, 50);
+    canvasContext.fillText("Score: " + player2Score, 650, 50);
 }
 function colorRect(x, y, width, height, color) {
     canvasContext.fillStyle = color;
