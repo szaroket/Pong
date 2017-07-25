@@ -2,8 +2,8 @@
 
 var canvas;
 var canvasContext;
-var ballX = 50;
-var ballY = 50;
+var ballX = 400;
+var ballY = 300;
 var ballSpeedX = 10;
 var ballSpeedY = 4;
 var ballRadius = 10;
@@ -35,10 +35,17 @@ function moveEverything() {
     ballY = ballY + ballSpeedY;
 
     if (ballX < ballRadius) {
-        ballSpeedX = -ballSpeedX;
+        //ballSpeedX = -ballSpeedX;
+        if (ballY > paddle1Y &&
+            ballY < paddle1Y + paddleHeight) {
+            ballSpeedX = -ballSpeedX;
+        } else {
+            ballReset();
+        }
     }
     if (ballX > (canvas.width - ballRadius)) {
-        ballSpeedX = -ballSpeedX;
+        //ballSpeedX = -ballSpeedX;
+        ballReset();
     }
     if (ballY < ballRadius) {
         ballSpeedY = -ballSpeedY;
@@ -86,4 +93,5 @@ function calculateMousePos(evt) {
 function ballReset() {
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
+    ballSpeedX = -ballSpeedX;
 }
