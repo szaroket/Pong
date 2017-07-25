@@ -94,6 +94,7 @@ function drawEverything() {
         return;
     }
 
+    drawNet();
     colorRect(paddle1X, paddle1Y, paddleWidth, paddleHeight, 'white');
     colorRect(paddle2X, paddle2Y, paddleWidth, paddleHeight, 'white');
 
@@ -156,5 +157,11 @@ function handleMouseClick(evt) {
         player1Score = 0;
         player2Score = 0;
         showWinScreen = false;
+    }
+}
+
+function drawNet() {
+    for (var i = 0; i < canvas.height; i += 40) {
+        colorRect(canvas.width / 2 - 1, i, 2, 20, 'white');
     }
 }
