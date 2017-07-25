@@ -45,7 +45,12 @@ function moveEverything() {
     }
     if (ballX > (canvas.width - ballRadius)) {
         //ballSpeedX = -ballSpeedX;
-        ballReset();
+        if (ballY > paddle2Y &&
+            ballY < paddle2Y + paddleHeight) {
+            ballSpeedX = -ballSpeedX;
+        } else {
+            ballReset();
+        }
     }
     if (ballY < ballRadius) {
         ballSpeedY = -ballSpeedY;
@@ -53,6 +58,8 @@ function moveEverything() {
     if (ballY > (canvas.height - ballRadius)) {
         ballSpeedY = -ballSpeedY;
     }
+
+    computerMovement();
 }
 
 function drawEverything() {
@@ -94,4 +101,12 @@ function ballReset() {
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
     ballSpeedX = -ballSpeedX;
+}
+
+function computerMovement() {
+    if (paddle2Y < ballY) {
+        paddle2Y += 6;
+    } else {
+        paddle2Y -= 6;
+    }
 }
