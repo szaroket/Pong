@@ -27,6 +27,9 @@ window.onload = function () {
     // Refresh window
     setInterval(callBoth, 1000 / fps);
 
+    // Restart game on mouse click
+    canvas.addEventListener('mousedown', handleMouseClick);
+
     // Set paddle's position value whenever mouse move
     canvas.addEventListener('mousemove',
         function (evt) {
@@ -82,7 +85,12 @@ function drawEverything() {
     if (showWinScreen) {
         canvasContext.font = "20px Georgia";
         canvasContext.fillStyle = 'white';
-        canvasContext.fillText("Click to continue ", 100, 50);
+        if (player1Score >= winnigScore) {
+            canvasContext.fillText("Left Player Won!", 100, 50);
+        } else if (player2Score >= winnigScore) {
+            canvasContext.fillText("Right Player Won!", 100, 50);
+        }
+        canvasContext.fillText("Click to continue ", 100, 150);
         return;
     }
 
@@ -127,8 +135,6 @@ function ballReset() {
     if (player1Score >= winnigScore ||
         player2Score >= winnigScore) {
 
-        player1Score = 0;
-        player2Score = 0;
         showWinScreen = true;
     }
     ballX = canvas.width / 2;
@@ -142,5 +148,13 @@ function computerMovement() {
         paddle2Y += 6;
     } else if (paddle2Center > ballY+35) {
         paddle2Y -= 6;
+    }
+}
+
+function handleMouseClick(evt) {
+    if (showWinScreen) {
+        player1Score = 0;
+        player2Score = 0;
+        showWinScreen = false;
     }
 }
