@@ -15,6 +15,8 @@ var paddleHeight = 150;
 var paddleWidth = 10;
 var player1Score = 0;
 var player2Score = 0;
+var winnigScore = 10;
+var showWinScreen = false;
 
 window.onload = function () {
     var fps = 30;
@@ -41,6 +43,10 @@ function moveEverything() {
         if (ballY > paddle1Y &&
             ballY < paddle1Y + paddleHeight) {
             ballSpeedX = -ballSpeedX;
+
+            var deltaY = ballY
+                - (paddle1Y + paddleHeight / 2);
+            ballSpeedY = deltaY * 0.35;
         } else {
             player2Score += 1;
             ballReset();
@@ -51,6 +57,10 @@ function moveEverything() {
         if (ballY > paddle2Y &&
             ballY < paddle2Y + paddleHeight) {
             ballSpeedX = -ballSpeedX;
+
+            var deltaY = ballY
+                - (paddle2Y + paddleHeight / 2);
+            ballSpeedY = deltaY * 0.35;
         } else {
             player1Score += 1;
             ballReset();
@@ -67,9 +77,17 @@ function moveEverything() {
 }
 
 function drawEverything() {
-    colorRect(0, 0, canvas.width, canvas.height, 'black')
-    colorRect(paddle1X, paddle1Y, paddleWidth, paddleHeight, 'white')
-    colorRect(paddle2X, paddle2Y, paddleWidth, paddleHeight, 'white')
+    colorRect(0, 0, canvas.width, canvas.height, 'black');
+
+    if (showWinScreen) {
+        canvasContext.font = "20px Georgia";
+        canvasContext.fillStyle = 'white';
+        canvasContext.fillText("Click to continue ", 100, 50);
+        return;
+    }
+
+    colorRect(paddle1X, paddle1Y, paddleWidth, paddleHeight, 'white');
+    colorRect(paddle2X, paddle2Y, paddleWidth, paddleHeight, 'white');
 
     colorCircle(ballX, ballY, ballRadius, 'white');
 
@@ -106,6 +124,13 @@ function calculateMousePos(evt) {
 }
 
 function ballReset() {
+    if (player1Score >= winnigScore ||
+        player2Score >= winnigScore) {
+
+        player1Score = 0;
+        player2Score = 0;
+        showWinScreen = true;
+    }
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
     ballSpeedX = -ballSpeedX;
