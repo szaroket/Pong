@@ -22,6 +22,13 @@ window.onload = function () {
 
     // Refresh window
     setInterval(callBoth, 1000 / fps);
+
+    // Set paddle's position value whenever mouse move
+    canvas.addEventListener('mousemove',
+        function (evt) {
+            var mousePos = calculateMousePos(evt);
+            paddle1Y = mousePos.y;
+        });
 }
 function moveEverything() {
     ballX = ballX + ballSpeedX;
