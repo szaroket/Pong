@@ -104,9 +104,10 @@ function ballReset() {
 }
 
 function computerMovement() {
-    if (paddle2Y < ballY) {
+    var paddle2Center = paddle2Y + paddleHeight / 2;
+    if (paddle2Center < ballY-35) {
         paddle2Y += 6;
-    } else {
+    } else if (paddle2Center > ballY+35) {
         paddle2Y -= 6;
     }
 }
